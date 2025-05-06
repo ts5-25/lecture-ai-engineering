@@ -1,7 +1,4 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-import time
 
 # ============================================
 # ページ設定
@@ -20,10 +17,20 @@ st.markdown("### コメントを解除しながらStreamlitの機能を学びま
 st.markdown("このデモコードでは、コメントアウトされた部分を順番に解除しながらUIの変化を確認できます。")
 
 # ============================================
-# サイドバー 
+# サイドバー
 # ============================================
 st.sidebar.header("デモのガイド")
 st.sidebar.info("コードのコメントを解除して、Streamlitのさまざまな機能を確認しましょう。")
+
+# ============================================
+# サイドバーに画像アップロード機能を追加
+# ============================================
+st.sidebar.subheader("画像アップロード")
+uploaded_image = st.sidebar.file_uploader("画像ファイルをアップロード", type=["png", "jpg", "jpeg"])
+
+if uploaded_image is not None:
+    caption = st.sidebar.text_input("画像のキャプションを入力してください", "アップロードされた画像")
+    st.image(uploaded_image, caption=caption, use_column_width=True)
 
 # ============================================
 # 基本的なUI要素
@@ -155,7 +162,7 @@ st.write(f"こんにちは、{name}さん！")
 #     # ファイルのデータを表示
 #     bytes_data = uploaded_file.getvalue()
 #     st.write(f"ファイルサイズ: {len(bytes_data)} bytes")
-#     
+#
 #     # CSVの場合はデータフレームとして読み込む
 #     if uploaded_file.name.endswith('.csv'):
 #         df = pd.read_csv(uploaded_file)
@@ -165,20 +172,23 @@ st.write(f"こんにちは、{name}さん！")
 # ============================================
 # カスタマイズ
 # ============================================
-# st.header("スタイルのカスタマイズ")
+st.header("スタイルのカスタマイズ")
 
 # カスタムCSS
-# st.markdown("""
-# <style>
-# .big-font {
-#     font-size:20px ！important;
-#     font-weight: bold;
-#     color: #0066cc;
-# }
-# </style>
-# """, unsafe_allow_html=True)
-# 
-# st.markdown('<p class="big-font">これはカスタムCSSでスタイリングされたテキストです！</p>', unsafe_allow_html=True)
+st.markdown(
+    """
+<style>
+.big-font {
+    font-size:20px ！important;
+    font-weight: bold;
+    color: #0066cc;
+}
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
+st.markdown('<p class="big-font">これはカスタムCSSでスタイリングされたテキストです！</p>', unsafe_allow_html=True)
 
 # ============================================
 # デモの使用方法
